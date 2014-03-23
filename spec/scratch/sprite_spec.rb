@@ -6,12 +6,9 @@ describe Scratch::Sprite do
     
     context "if a block is given" do
       it "should yield self" do
-        yielded = false
-        described_class.new do |stage|
-          expect(stage).to be_a(described_class)
-          yielded = true
-        end
-        expect(yielded).to eq(true)
+        expect { |b|
+          described_class.new(&b)
+        }.to yield_with_args(described_class)
       end
     end
 
