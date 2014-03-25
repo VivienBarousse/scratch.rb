@@ -78,4 +78,49 @@ describe Scratch::Stage do
     end
   end
 
+  describe "#backdrop" do
+    context "without any arguments" do
+      context "when there is no backdrops set" do
+        it "should return nil" do
+          expect(subject.backdrop).to be_nil
+        end
+      end
+
+      context "when there is only one backdrop set" do
+        before do
+          subject.backdrop "nature/woods"
+        end
+
+        it "should return the backdrop" do
+          expect(subject.backdrop).to eq("nature/woods")
+        end
+      end
+
+      context "when there are more than one backdrops set" do
+        before do
+          subject.backdrop "outdoors/school1"
+          subject.backdrop "outdoors/school2"
+        end
+
+        it "should return the first one set" do
+          expect(subject.backdrop).to eq("outdoors/school1")
+        end
+      end
+    end
+
+    context "with an argument" do
+      it "should add the backdrop to the list of backdrops" do
+        subject.backdrop "nature/woods"
+        expect(subject.backdrops).to eq(['nature/woods'])
+      end
+
+      it "should support having more than one backdrop" do
+        subject.backdrop "outdoors/school1"
+        subject.backdrop "outdoors/school2"
+        expect(subject.backdrops).
+            to eq(['outdoors/school1', 'outdoors/school2'])
+      end
+    end
+  end
+
 end
