@@ -6,13 +6,26 @@ describe Scratch::Stage do
     expect(1).to eq(1)
   end
 
+  let(:renderer) do
+    Scratch::Renderer.any_instance
+  end
+
+  before do
+    renderer.stub(:render)
+  end
+
   describe "::new" do
-    
+
     context "if a block is given" do
       it "should yield self" do
         expect { |b|
           described_class.new(&b)
         }.to yield_with_args(described_class)
+      end
+
+      it "should render the stage using the renderer" do
+        renderer.should_receive(:render)
+        described_class.new { |s| }
       end
     end
 
@@ -56,6 +69,13 @@ describe Scratch::Stage do
       expect(subject.sprites.length).to be(2)
     end
 
+  end
+
+  describe "#show" do
+    it "should render the stage using the renderer" do
+      renderer.should_receive(:render)
+      subject.show
+    end
   end
 
 end

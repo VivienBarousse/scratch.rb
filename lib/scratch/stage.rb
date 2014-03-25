@@ -4,6 +4,7 @@ module Scratch
     def initialize
       if block_given?
         yield self
+        show
       end
     end
 
@@ -21,6 +22,10 @@ module Scratch
 
     def sprites
       @sprites ||= []
+    end
+
+    def show
+      Scratch::Renderer.new(self).render
     end
 
     private
