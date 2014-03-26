@@ -359,4 +359,11 @@ describe Scratch::Sprite do
     end
   end
 
+  describe "#size" do
+    it "should remember the size" do
+      subject.size = 96
+      expect(subject.size).to eq(96)
+    end
+  end
+
 end

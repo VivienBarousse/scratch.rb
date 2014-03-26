@@ -1,11 +1,14 @@
 module Scratch
   class Sprite
 
+    attr_accessor :size
+
     def initialize
       @when_game_starts_blocks = []
       @costume_id = 0
       @position = { :x => 0, :y => 0 }
       @direction = 90
+      @size = 100
 
       if block_given?
         yield self
