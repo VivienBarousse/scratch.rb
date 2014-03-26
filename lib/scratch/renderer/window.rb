@@ -10,7 +10,7 @@ module Scratch
       HEIGHT = 320
 
       def initialize(stage)
-        super(WIDTH, HEIGHT, true)
+        super(WIDTH, HEIGHT, true, 20)
         @stage = stage
         @backdrops = {}
         @costumes = {}
