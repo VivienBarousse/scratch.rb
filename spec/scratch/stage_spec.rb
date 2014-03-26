@@ -148,4 +148,19 @@ describe Scratch::Stage do
     end
   end
 
+  describe "#sound" do
+    it "should add it to the list of sounds" do
+      subject.sound("filename", :sound)
+      expect(subject.sounds).to eq({:sound => "filename"})
+    end
+  end
+
+  describe "#play_sound" do
+    it "should queue the sound that was set" do
+      subject.sound("filename", :sound)
+      subject.play_sound(:sound)
+      expect(subject._queued_sounds).to eq(['filename'])
+    end
+  end
+
 end

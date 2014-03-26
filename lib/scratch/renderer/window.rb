@@ -6,6 +6,8 @@ module Scratch
 
       COSTUMES_ROOT = File.expand_path('../../../../media/costumes', __FILE__)
 
+      SAMPLES_ROOT = File.expand_path('../../../../media/sounds', __FILE__)
+
       WIDTH = 480
       HEIGHT = 320
 
@@ -14,11 +16,17 @@ module Scratch
         @stage = stage
         @backdrops = {}
         @costumes = {}
+        @samples = {}
       end
 
       def update
         @stage.mouse_x = mouse_x.round - (WIDTH / 2)
         @stage.mouse_y = -1 * (mouse_y.round - (HEIGHT / 2))
+
+        while @stage._queued_sounds.any?
+          file = @stage._queued_sounds.pop
+          sample(file).play
+        end
       end
 
       def draw
@@ -44,6 +52,13 @@ module Scratch
         @costumes[filename] ||= begin
           full_filename = File.expand_path(filename, COSTUMES_ROOT)
           Gosu::Image.new(self, full_filename, false)
+        end
+      end
+
+      def sample(filename)
+        @samples[filename] ||= begin
+          full_filename = File.expand_path(filename, SAMPLES_ROOT)
+          Gosu::Sample.new(self, full_filename)
         end
       end
 

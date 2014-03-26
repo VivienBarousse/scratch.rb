@@ -34,12 +34,26 @@ module Scratch
       end
     end
 
+    def sound(file, name)
+      if file.is_a?(String) && name.is_a?(Symbol)
+        sounds[name] = file
+      end
+    end
+
+    def play_sound(name)
+      _queued_sounds << sounds[name]
+    end
+
     def sprites
       @sprites ||= []
     end
 
     def backdrops
       @backdrops ||= []
+    end
+
+    def sounds
+      @sounds ||= {}
     end
 
     def show
@@ -50,6 +64,10 @@ module Scratch
       sprites.each do |sprite|
         sprite._game_starts
       end
+    end
+
+    def _queued_sounds
+      @_queued_sounds ||= []
     end
 
     private
