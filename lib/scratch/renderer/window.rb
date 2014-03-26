@@ -20,9 +20,9 @@ module Scratch
         backdrop(@stage.backdrop).draw(0, 0, 0)
         @stage.sprites.each do |sprite|
           image = costume(sprite.costume)
-          x = sprite.x + (WIDTH / 2) - (image.width / 2)
-          y = sprite.y + (HEIGHT / 2) - (image.height / 2)
-          image.draw(x, y, 0)
+          x = sprite.x + (WIDTH / 2)
+          y = -sprite.y + (HEIGHT / 2)
+          image.draw_rot(x, y, 0, sprite.direction - 90)
         end
       end
 

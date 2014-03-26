@@ -187,6 +187,111 @@ describe Scratch::Sprite do
         expect(subject.y).to eq(0)
       end
     end
+
+    context "when a direction is set" do
+      context "to be 90 degrees" do
+        before do
+          subject.direction = 90
+        end
+
+        it "should move right" do
+          subject.move(10)
+          expect(subject.x).to eq(10)
+          expect(subject.y).to eq(0)
+        end
+      end
+
+      context "to be 0 degrees" do
+        before do
+          subject.direction = 0
+        end
+
+        it "should move up" do
+          subject.move(10)
+          expect(subject.x).to eq(0)
+          expect(subject.y).to eq(10)
+        end
+      end
+
+      context "to be -90 degrees" do
+        before do
+          subject.direction = -90
+        end
+
+        it "should move left" do
+          subject.move(10)
+          expect(subject.x).to eq(-10)
+          expect(subject.y).to eq(0)
+        end
+      end
+
+      context "to be 180 degrees" do
+        before do
+          subject.direction = 180
+        end
+
+        it "should move down" do
+          subject.move(10)
+          expect(subject.x).to eq(0)
+          expect(subject.y).to eq(-10)
+        end
+      end
+
+      context "to be 45 degrees" do
+        before do
+          subject.direction = 45
+        end
+
+        it "shoud move diagonaly" do
+          subject.move(10)
+          expect(subject.x).to eq(7)
+          expect(subject.y).to eq(7)
+        end
+      end
+    end
+  end
+
+  describe "#direction" do
+    context "by default" do
+      it "should return 90 degrees" do
+        expect(subject.direction).to eq(90)
+      end
+    end
+
+    context "when it is changed" do
+      it "should return the new value" do
+        subject.direction = 45
+        expect(subject.direction).to eq(45)
+      end
+
+      context "with a value below -180" do
+        it "should bring it back in the ]180;180] range" do
+          subject.direction = -270
+          expect(subject.direction).to eq(90)
+        end
+      end
+
+      context "with a value of exactly -180" do
+        it "should bring it back in the ]-180;180] range" do
+          subject.direction = -180
+          expect(subject.direction).to eq(180)
+        end
+      end
+
+      context "with a value of exactly 180" do
+        it "should leave it in the ]-180;180] range" do
+          subject.direction = 180
+          expect(subject.direction).to eq(180)
+        end
+      end
+
+      context "with a value above 180" do
+        it "should bring it back in the ]-180;180] range" do
+          subject.direction = 270
+          expect(subject.direction).to eq(-90)
+        end
+      end
+    end
   end
 
 end
