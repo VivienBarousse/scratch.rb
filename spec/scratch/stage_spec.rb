@@ -134,4 +134,18 @@ describe Scratch::Stage do
     end
   end
 
+  describe "#mouse_x" do
+    it "should remember the value" do
+      subject.mouse_x = 110
+      expect(subject.mouse_x).to eq(110)
+    end
+  end
+
+  describe "#mouse_y" do
+    it "should remember the value" do
+      subject.mouse_y = 110
+      expect(subject.mouse_y).to eq(110)
+    end
+  end
+
 end

@@ -1,6 +1,8 @@
 module Scratch
   class Stage
 
+    attr_accessor :mouse_x, :mouse_y
+
     def initialize
       if block_given?
         yield self

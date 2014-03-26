@@ -16,6 +16,11 @@ module Scratch
         @costumes = {}
       end
 
+      def update
+        @stage.mouse_x = mouse_x.round - (WIDTH / 2)
+        @stage.mouse_y = -1 * (mouse_y.round - (HEIGHT / 2))
+      end
+
       def draw
         backdrop(@stage.backdrop).draw(0, 0, 0)
         @stage.sprites.each do |sprite|
