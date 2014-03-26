@@ -68,6 +68,37 @@ describe Scratch::Sprite do
     end
   end
 
+  describe "#next_costume" do
+    context "when they are no costumes" do
+      it "should do nothing, but not raise an error" do
+        subject.next_costume
+      end
+    end
+
+    context "when there is only one costume" do
+      it "should not change the costume" do
+        subject.costume "a"
+        subject.next_costume
+        expect(subject.costume).to eq("a")
+      end
+    end
+
+    context "when there are more than one costume" do
+      it "should change to the next costume" do
+        subject.costume "a"
+        subject.costume "b"
+        subject.costume "c"
+        expect(subject.costume).to eq('a')
+        subject.next_costume
+        expect(subject.costume).to eq('b')
+        subject.next_costume
+        expect(subject.costume).to eq('c')
+        subject.next_costume
+        expect(subject.costume).to eq('a')
+      end
+    end
+  end
+
   describe "#when_game_starts" do
     context "when no block is given" do
       it "should raise an error" do

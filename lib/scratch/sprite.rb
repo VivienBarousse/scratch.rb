@@ -3,6 +3,7 @@ module Scratch
 
     def initialize
       @when_game_starts_blocks = []
+      @costume_id = 0
       if block_given?
         yield self
       end
@@ -13,7 +14,7 @@ module Scratch
         costumes << c
       elsif c.nil?
         if costumes.any?
-          costumes.first
+          costumes[@costume_id]
         else
           nil
         end
@@ -22,6 +23,11 @@ module Scratch
 
     def costumes
       @costumes ||= []
+    end
+
+    def next_costume
+      return unless costumes.any?
+      @costume_id = (@costume_id + 1) % costumes.length
     end
 
     def when_game_starts(&b)
