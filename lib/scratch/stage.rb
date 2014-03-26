@@ -44,6 +44,12 @@ module Scratch
       Scratch::Renderer.new(self).render
     end
 
+    def _game_starts
+      sprites.each do |sprite|
+        sprite._game_starts
+      end
+    end
+
     private
 
     def add_sprite(s)

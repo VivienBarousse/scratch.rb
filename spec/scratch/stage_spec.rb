@@ -123,4 +123,15 @@ describe Scratch::Stage do
     end
   end
 
+  describe "#_game_starts" do
+    let(:sprite) do
+      subject.sprite
+    end
+
+    it "should call _game_started on sprites" do
+      sprite.should_receive(:_game_starts)
+      subject._game_starts
+    end
+  end
+
 end

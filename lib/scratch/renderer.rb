@@ -13,6 +13,7 @@ module Scratch
 
     def render
       window = Scratch::Renderer::Window.new(@stage)
+      @stage._game_starts
       window.show
     end
 

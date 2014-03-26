@@ -68,4 +68,48 @@ describe Scratch::Sprite do
     end
   end
 
+  describe "#when_game_starts" do
+    context "when no block is given" do
+      it "should raise an error" do
+        expect {
+          subject.when_game_starts
+        }.to raise_error(ArgumentError)
+      end
+    end
+
+    context "when a block is given" do
+      it "should execute it when the game starts" do
+        ran = 0
+        subject.when_game_starts do
+          ran = 1
+        end
+        subject._game_starts
+
+        # Allow for multithreaded execution
+        sleep(0.1)
+
+        expect(ran).to eq(1)
+      end
+    end
+
+    context "when more than one block are given" do
+      it "should execute them all when the game starts" do
+        ran = Set.new
+        subject.when_game_starts do
+          ran << 'a'
+        end
+        subject.when_game_starts do
+          ran << 'b'
+        end
+        subject._game_starts
+
+        # Allow for multithreaded execution
+        sleep(0.1)
+
+        expect(ran).to include('a')
+        expect(ran).to include('b')
+      end
+    end
+  end
+
 end
