@@ -345,4 +345,18 @@ describe Scratch::Sprite do
     end
   end
 
+  describe "#x=" do
+    it "should remember the position" do
+      subject.x = 110
+      expect(subject.x).to eq(110)
+    end
+  end
+
+  describe "#y=" do
+    it "should remember the position" do
+      subject.y = 110
+      expect(subject.y).to eq(110)
+    end
+  end
+
 end

@@ -75,8 +75,16 @@ module Scratch
       @position[:x]
     end
 
+    def x=(x)
+      @position[:x] = x
+    end
+
     def y
       @position[:y]
+    end
+
+    def y=(y)
+      @position[:y] = y
     end
 
     def _game_starts
