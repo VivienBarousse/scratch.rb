@@ -33,6 +33,16 @@ module Scratch
       @costume_id = (@costume_id + 1) % costumes.length
     end
 
+    def point_towards(x, y)
+      dx = (x - self.x).to_f
+      dy = (y - self.y).to_f
+      ang = Math.atan(dy/dx)
+      if dx < 0
+        ang -= Math::PI
+      end
+      self.direction_rad = ang
+    end
+
     def direction
       @direction
     end
@@ -81,6 +91,10 @@ module Scratch
 
     def direction_rad
       (direction.to_f - 90.0) / -180.0 * Math::PI
+    end
+
+    def direction_rad=(d)
+      self.direction = ((d / Math::PI * -180) + 90).round
     end
 
   end

@@ -294,4 +294,55 @@ describe Scratch::Sprite do
     end
   end
 
+  describe "#point_towards" do
+    context "when pointing towards [10,0]" do
+      it "should set the direction to 90 degrees" do
+        subject.point_towards(10, 0)
+        expect(subject.direction).to eq(90)
+      end
+    end
+
+    context "when pointing towards [0,10]" do
+      it "should set the direction to 0 degrees" do
+        subject.point_towards(0, 10)
+        expect(subject.direction).to eq(0)
+      end
+    end
+
+    context "when pointing towards [-10,0]" do
+      it "should set the direction to -90 degrees" do
+        subject.point_towards(-10, 0)
+        expect(subject.direction).to eq(-90)
+      end
+    end
+
+    context "when pointing towards [0,-10]" do
+      it "should set the direction to -90 degrees" do
+        subject.point_towards(0, -10)
+        expect(subject.direction).to eq(180)
+      end
+    end
+
+    context "when pointing towards [10, 10]" do
+      it "should set the direction to 45 degrees" do
+        subject.point_towards(10, 10)
+        expect(subject.direction).to eq(45)
+      end
+    end
+
+    context "when pointing towards [-10, 10]" do
+      it "should set the direction to -45 degrees" do
+        subject.point_towards(-10, 10)
+        expect(subject.direction).to eq(-45)
+      end
+    end
+
+    context "when pointing towards [3, 4]" do
+      it "should set the direction to 37 degrees" do
+        subject.point_towards(3, 4)
+        expect(subject.direction).to eq(37)
+      end
+    end
+  end
+
 end
