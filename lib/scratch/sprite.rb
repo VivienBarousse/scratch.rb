@@ -4,6 +4,7 @@ module Scratch
     def initialize
       @when_game_starts_blocks = []
       @costume_id = 0
+      @position = { :x => 0, :y => 0 }
       if block_given?
         yield self
       end
@@ -30,11 +31,23 @@ module Scratch
       @costume_id = (@costume_id + 1) % costumes.length
     end
 
+    def move(steps)
+      @position[:x] += steps
+    end
+
     def when_game_starts(&b)
       unless block_given?
         raise ArgumentError.new("I need an action to do")
       end
       @when_game_starts_blocks << b
+    end
+
+    def x
+      @position[:x]
+    end
+
+    def y
+      @position[:y]
     end
 
     def _game_starts

@@ -6,8 +6,11 @@ module Scratch
 
       COSTUMES_ROOT = File.expand_path('../../../../media/costumes', __FILE__)
 
+      WIDTH = 480
+      HEIGHT = 320
+
       def initialize(stage)
-        super(480, 360, true)
+        super(WIDTH, HEIGHT, true)
         @stage = stage
         @backdrops = {}
         @costumes = {}
@@ -16,7 +19,10 @@ module Scratch
       def draw
         backdrop(@stage.backdrop).draw(0, 0, 0)
         @stage.sprites.each do |sprite|
-          costume(sprite.costume).draw(0, 0, 0)
+          image = costume(sprite.costume)
+          x = sprite.x + (WIDTH / 2) - (image.width / 2)
+          y = sprite.y + (HEIGHT / 2) - (image.height / 2)
+          image.draw(x, y, 0)
         end
       end
 

@@ -143,4 +143,50 @@ describe Scratch::Sprite do
     end
   end
 
+  describe "#move" do
+    context "when I give zero as a value" do
+      it "should not move" do
+        subject.move(0)
+        expect(subject.x).to eq(0)
+        expect(subject.y).to eq(0)
+      end
+    end
+
+    context "with positive values" do
+      it "should move on the x axis" do
+        subject.move(10)
+        expect(subject.x).to eq(10)
+        expect(subject.y).to eq(0)
+        subject.move(10)
+        expect(subject.x).to eq(20)
+        expect(subject.y).to eq(0)
+      end
+    end
+
+    context "with negative values" do
+      it "should move on the x axis" do
+        subject.move(-10)
+        expect(subject.x).to eq(-10)
+        expect(subject.y).to eq(0)
+        subject.move(-10)
+        expect(subject.x).to eq(-20)
+        expect(subject.y).to eq(0)
+      end
+    end
+
+    context "with a mixture of positive and negative values" do
+      it "should move on the x axis" do
+        subject.move(10)
+        expect(subject.x).to eq(10)
+        expect(subject.y).to eq(0)
+        subject.move(-15)
+        expect(subject.x).to eq(-5)
+        expect(subject.y).to eq(0)
+        subject.move(20)
+        expect(subject.x).to eq(15)
+        expect(subject.y).to eq(0)
+      end
+    end
+  end
+
 end
