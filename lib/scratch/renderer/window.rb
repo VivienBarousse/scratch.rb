@@ -35,9 +35,12 @@ module Scratch
           image = costume(sprite.costume)
           x = sprite.x + (WIDTH / 2)
           y = -sprite.y + (HEIGHT / 2)
-          direction = sprite.direction - 90
-          scale = sprite.size / 100.0
-          image.draw_rot(x, y, 0, direction, 0.5, 0.5, scale, scale)
+          direction = sprite.rotation - 90
+          scale_x = scale_y = sprite.size / 100.0
+          if direction == -180 && sprite.rotation_style == :left_right
+            scale_y = -scale_y
+          end
+          image.draw_rot(x, y, 0, direction, 0.5, 0.5, scale_x, scale_y)
         end
       end
 

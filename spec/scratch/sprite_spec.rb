@@ -366,4 +366,53 @@ describe Scratch::Sprite do
     end
   end
 
+  describe "#rotation_style" do
+    it "should default to :all_around" do
+      expect(subject.rotation_style).to eq(:all_around)
+    end
+
+    context "with a legit value" do
+      it "should remember the value" do
+        subject.rotation_style = :left_right
+        expect(subject.rotation_style).to eq(:left_right)
+      end
+    end
+
+    context "with a bad value" do
+      it "should raise an argument error" do
+        expect {
+          subject.rotation_style = :meow
+        }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
+  describe "#rotation" do
+    context "when rotation style is all around" do
+      before do
+        subject.rotation_style = :all_around
+      end
+
+      it "should return the direction, all the time" do
+        subject.direction = 12
+        expect(subject.rotation).to eq(12)
+        subject.direction = -12
+        expect(subject.rotation).to eq(-12)
+        subject.direction = 112
+        expect(subject.rotation).to eq(112)
+        subject.direction = -112
+        expect(subject.rotation).to eq(-112)
+      end
+    end
+
+    context "when rotation style is left-right" do
+      before do
+        subject.rotation_style = :left_right
+      end
+
+      context "and the sprite is pointing right" do
+      end
+    end
+  end
+
 end

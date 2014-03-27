@@ -10,6 +10,8 @@ module Scratch
       @direction = 90
       @size = 100
 
+      self.rotation_style = :all_around
+
       if block_given?
         yield self
       end
@@ -58,6 +60,33 @@ module Scratch
         d -= 360
       end
       @direction = d
+    end
+
+    def rotation
+      case rotation_style
+        when :all_around
+          direction
+        when :left_right
+          if direction < 0
+            -90
+          else
+            90
+          end
+        when :dont_rotate
+          90
+      end
+    end
+
+    def rotation_style
+      @rotation_style
+    end
+
+    def rotation_style=(r)
+      if Set.new([:left_right, :all_around, :dont_rotate]).include?(r)
+        @rotation_style = r
+      else
+        raise ArgumentError.new("Don't know about rotation style #{r}")
+      end
     end
 
     def move(steps)
